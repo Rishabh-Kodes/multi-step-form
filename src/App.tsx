@@ -1,9 +1,12 @@
 import MultiStepForm from "./containers/form";
+import { FormProvider } from "./containers/form/form.context";
 
 function App() {
   return (
     <>
-      <MultiStepForm />
+      <FormProvider>
+        <MultiStepForm />
+      </FormProvider>
     </>
   );
 }

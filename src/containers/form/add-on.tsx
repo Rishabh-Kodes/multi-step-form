@@ -1,31 +1,28 @@
 import Button from "../../components/button";
 import Checkbox from "../../components/checkbox";
+import { addOns, steps } from "./constants";
+import { useFormContext } from "./form.context";
 import styles from "./form.module.scss";
+import { getFormattedPrice } from "./form.utils";
 
 const AddOn = () => {
-  const addOns = [
-    {
-      key: "online-service",
-      name: "Online service",
-      description: "Access to multiplayer games",
-      priceMonthly: 1,
-      priceYearly: 10,
-    },
-    {
-      key: "larger-storage",
-      name: "Larger storage",
-      description: "Extra 1TB of cloud save",
-      priceMonthly: 2,
-      priceYearly: 20,
-    },
-    {
-      key: "customizable-profile",
-      name: "Customizable profile",
-      description: "Custom theme on your profile",
-      priceMonthly: 2,
-      priceYearly: 20,
-    },
-  ];
+  const { formData, setCurrentStep, updateFormData } = useFormContext();
+  const { addOns: selectedAddOns, planType } = formData;
+
+  const handleNextStep = () => {
+    setCurrentStep(steps[3].key);
+  };
+
+  const handleGoBack = () => {
+    setCurrentStep(steps[1].key);
+  };
+
+  const handleAddOnChange = (addOnKey: string) => {
+    const newAddOns = selectedAddOns.includes(addOnKey)
+      ? selectedAddOns.filter((key) => key !== addOnKey)
+      : [...selectedAddOns, addOnKey];
+    updateFormData("addOns", newAddOns);
+  };
 
   return (
     <section className={styles["form-container__right-content-container"]}>
@@ -39,7 +36,10 @@ const AddOn = () => {
       <div className={styles["add-ons"]}>
         {addOns.map((addOn) => (
           <label className={styles["add-ons__card"]} key={addOn.key}>
-            <Checkbox />
+            <Checkbox
+              checked={selectedAddOns.includes(addOn.key)}
+              onChange={() => handleAddOnChange(addOn.key)}
+            />
             <div>
               <div className={styles["add-ons__card-title"]}>{addOn.name}</div>
               <div className={styles["add-ons__card-description"]}>
@@ -47,15 +47,21 @@ const AddOn = () => {
               </div>
             </div>
             <div className={styles["add-ons__card-price"]}>
-              {`+$${addOn.priceMonthly}/mo`}
+              {getFormattedPrice(
+                addOn.priceYearly,
+                addOn.priceMonthly,
+                planType
+              )}
             </div>
           </label>
         ))}
       </div>
 
       <div className={styles["form-container__footer"]}>
-        <Button variant="ghost">Go Back</Button>
-        <Button>Next Step</Button>
+        <Button variant="ghost" onClick={handleGoBack}>
+          Go Back
+        </Button>
+        <Button onClick={handleNextStep}>Next Step</Button>
       </div>
     </section>
   );

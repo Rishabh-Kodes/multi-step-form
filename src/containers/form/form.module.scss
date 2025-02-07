@@ -80,6 +80,12 @@
     font-weight: 700;
     color: var(--light-gray);
     grid-row: 1 / 4;
+
+    &--active {
+      background: var(--light-blue);
+      border-color: var(--light-blue);
+      color: var(--marine-blue);
+    }
   }
 
   &__number-text {

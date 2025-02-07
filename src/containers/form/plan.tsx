@@ -1,32 +1,22 @@
 import Button from "../../components/button";
 import Switch from "../../components/switch";
 import { cn } from "../../utils/cn";
+import { plans, steps } from "./constants";
+import { useFormContext } from "./form.context";
 import styles from "./form.module.scss";
+import { getFormattedPrice } from "./form.utils";
 
 const Plan = () => {
-  const plans = [
-    {
-      key: "arcade",
-      icon: "/assets/images/icon-arcade.svg",
-      name: "Arcade",
-      priceMonthly: 9,
-      priceYearly: 9 * 10,
-    },
-    {
-      key: "advanced",
-      icon: "/assets/images/icon-advanced.svg",
-      name: "Advanced",
-      priceMonthly: 12,
-      priceYearly: 12 * 10,
-    },
-    {
-      key: "pro",
-      icon: "/assets/images/icon-pro.svg",
-      name: "Pro",
-      priceMonthly: 15,
-      priceYearly: 15 * 10,
-    },
-  ];
+  const { formData, setCurrentStep, updateFormData } = useFormContext();
+  const { plan: selectedPlan, planType } = formData;
+
+  const handleNextStep = () => {
+    setCurrentStep(steps[2].key);
+  };
+
+  const handleGoBack = () => {
+    setCurrentStep(steps[0].key);
+  };
 
   return (
     <section className={styles["form-container__right-content-container"]}>
@@ -45,13 +35,15 @@ const Plan = () => {
               name="plan"
               value={plan.key}
               className={styles["plans__card-input"]}
+              checked={selectedPlan === plan.key}
+              onChange={() => updateFormData("plan", plan.key)}
             />
             <div className={styles["plans__card-icon"]}>
               <img src={plan.icon} alt={plan.name} />
             </div>
             <div className={styles["plans__card-title"]}>{plan.name}</div>
             <div className={styles["plans__card-price"]}>
-              ${plan.priceMonthly}/mo
+              {getFormattedPrice(plan.priceYearly, plan.priceMonthly, planType)}
             </div>
           </label>
         ))}
@@ -59,13 +51,20 @@ const Plan = () => {
 
       <div className={styles["plans-toggle"]}>
         <div className={styles["plans-toggle__text"]}>Monthly</div>
-        <Switch />
+        <Switch
+          checked={planType === "yearly"}
+          onChange={(e) =>
+            updateFormData("planType", e.target.checked ? "yearly" : "monthly")
+          }
+        />
         <div className={styles["plans-toggle__text"]}>Yearly</div>
       </div>
 
       <div className={styles["form-container__footer"]}>
-        <Button variant="ghost">Go Back</Button>
-        <Button>Next Step</Button>
+        <Button variant="ghost" onClick={handleGoBack}>
+          Go Back
+        </Button>
+        <Button onClick={handleNextStep}>Next Step</Button>
       </div>
     </section>
   );
