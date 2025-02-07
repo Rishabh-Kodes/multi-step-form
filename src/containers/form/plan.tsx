@@ -41,9 +41,15 @@ const Plan = () => {
             <div className={styles["plans__card-icon"]}>
               <img src={plan.icon} alt={plan.name} />
             </div>
-            <div className={styles["plans__card-title"]}>{plan.name}</div>
-            <div className={styles["plans__card-price"]}>
-              {getFormattedPrice(plan.priceYearly, plan.priceMonthly, planType)}
+            <div>
+              <div className={styles["plans__card-title"]}>{plan.name}</div>
+              <div className={styles["plans__card-price"]}>
+                {getFormattedPrice(
+                  plan.priceYearly,
+                  plan.priceMonthly,
+                  planType
+                )}
+              </div>
             </div>
           </label>
         ))}

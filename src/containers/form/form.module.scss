@@ -5,8 +5,11 @@
   display: grid;
   grid-template-columns: 282px auto;
   min-height: 616px;
-  min-width: 966px;
+  max-width: 966px;
+  width: 100%;
   gap: 24px;
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+  margin: 0 16px;
 
   &__left-sidebar {
     display: flex;
@@ -49,7 +52,6 @@
   }
 
   &__description {
-    font-size: 16px;
     color: var(--cool-gray);
   }
 
@@ -58,6 +60,54 @@
     display: flex;
     flex-direction: column;
     gap: 24px;
+  }
+
+  @media (max-width: 768px) {
+    display: flex;
+    flex-direction: column;
+    background: transparent;
+    padding: 0;
+    width: 100%;
+    gap: 0;
+    box-shadow: none;
+    margin: 0;
+    padding-bottom: 100px;
+
+    &__left-sidebar {
+      flex-direction: row;
+      justify-content: center;
+      gap: 16px;
+      height: 180px;
+      padding: 34px 16px;
+      border-radius: 0;
+      background: url("../../assets/images/bg-sidebar-mobile.svg") no-repeat center center / cover;
+    }
+
+    &__right-content {
+      margin: 16px;
+      margin-top: -60px;
+      padding: 40px 24px;
+      border-radius: 12px;
+      background: var(--white);
+    }
+
+    &__header {
+      margin-top: 0;
+    }
+
+    &__footer {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      padding: 16px;
+      background: var(--white);
+      margin-bottom: 0;
+    }
+
+    &__inputs-container {
+      margin-top: 24px;
+    }
   }
 }
 
@@ -93,6 +143,10 @@
     font-weight: 400;
     color: var(--light-gray);
     text-transform: uppercase;
+
+    @media (max-width: 768px) {
+      display: none;
+    }
   }
 
   &__step-text {
@@ -100,6 +154,14 @@
     font-weight: 700;
     color: var(--white);
     text-transform: uppercase;
+
+    @media (max-width: 768px) {
+      display: none;
+    }
+  }
+
+  @media (max-width: 768px) {
+    display: unset;
   }
 }
 
@@ -136,17 +198,32 @@
   }
 
   &__card-title {
-    font-size: 16px;
     font-weight: 500;
     color: var(--marine-blue);
     margin-bottom: 6px;
   }
 
   &__card-price {
-    font-size: 16px;
     font-weight: 400;
     color: var(--cool-gray);
     line-height: 1;
+  }
+
+  @media (max-width: 768px) {
+    margin-top: 24px;
+    grid-template-columns: 1fr;
+
+    &__card {
+      height: 80px;
+      padding: 0 16px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    &__card-icon {
+      margin-bottom: 0;
+    }
   }
 }
 
@@ -161,9 +238,12 @@
   border-radius: 8px;
 
   &__text {
-    font-size: 16px;
     font-weight: 500;
     color: var(--marine-blue);
+  }
+
+  &__button {
+    margin-top: 24px;
   }
 }
 
