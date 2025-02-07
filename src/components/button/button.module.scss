@@ -1,0 +1,29 @@
+.button {
+  cursor: pointer;
+  color: var(--white);
+  background-color: var(--purplish-blue);
+  border: none;
+  outline: none;
+  padding: 16px 26px;
+  border-radius: 6px;
+  font-size: 16px;
+  font-weight: 400;
+  letter-spacing: 1%;
+  font: inherit;
+
+  &:active {
+    background-color: var(--marine-blue);
+  }
+
+  &--ghost {
+    background-color: transparent;
+    padding: 0;
+    color: var(--cool-gray);
+    font-weight: 700;
+
+    &:active {
+      background-color: transparent;
+      color: var(--marine-blue);
+    }
+  }
+}

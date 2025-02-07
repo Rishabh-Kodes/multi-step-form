@@ -1,0 +1,29 @@
+.switch {
+  position: relative;
+  width: 38px;
+  height: 20px;
+  -webkit-appearance: none;
+  background: var(--marine-blue);
+  outline: none;
+  border-radius: 20px;
+  box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2);
+  transition: 0.3s;
+  cursor: pointer;
+
+
+  &:before {
+    content: "";
+    position: absolute;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    top: 4px;
+    left: 4px;
+    background: var(--white);
+    transition: 0.3s;
+  }
+
+  &:checked:before {
+    left: 22px;
+  }
+}
