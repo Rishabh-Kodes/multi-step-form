@@ -289,6 +289,20 @@
     justify-self: flex-end;
     color: var(--purplish-blue);
   }
+
+  @media (max-width: 768px) {
+    margin-top: 24px;
+
+    &__card {
+      height: auto;
+      gap: 12px;
+      padding: 12px;
+    }
+
+    &__card-description {
+      font-size: 14px;
+    }
+  }
 }
 
 .summary {
@@ -351,6 +365,10 @@
 
   &__item-price {
     color: var(--marine-blue);
+  }
+
+  @media (max-width: 768px) {
+    margin-top: 24px;
   }
 }
 
